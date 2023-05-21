@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUSTOMER ORDER DATABASE</title>
+    <link rel="stylesheet" href="./main.css">
+    <script src="./main.js"></script>
+</head>
+<body>
+    
+    <h1>CUSTOMER ORDER DATABASE</h1>
+    <h2>{{message}}</h2>
+    <br>
+    {{#if edit_id}}
+     <h3>Editing..!</h3>
+    <form method="post" action="/update_database/{{edit_id}}">
+        <label for="" class="label">Customer id:</label>
+        <input type="text" name="customerid" value="{{edit_book.customerid}}"><br><br>
+        <label for="" class="label">Order id:</label>
+        <input type="text" name="orderid" value="{{edit_book.orderid}}"><br><br>
+        <label for="" class="label">Amount:</label>
+        <input type="text" name="amount" value="{{edit_book.amount}}"><br><br>
+        <label for="" class="label">Address:</label>
+        <input type="text" name="address" value="{{edit_book.address}}"><br><br>
+        <input type="submit" class="submit">
+    </form><br><br>
+    {{else}}
+
+    <h3>Entry for Customer Order</h3>
+    <form method="post" action="/store_database" onsubmit="return validate1()" >
+        <label for="" class="label" >customer id:</label>
+        <input type="text" name="customerid" id="custid-field"><br><br>
+        <label for="" class="label">Order id:</label>
+        <input type="text" name="orderid" id="productid-field"><br><br>
+        <label for="" class="label">Amount:</label>
+        <input type="text" name="amount" id="amount-field"><br><br>
+        <label for="" class="label">Address:</label>
+        <input type="text" name="address" id="address-field"><br><br>
+        <input type="submit" class="submit" >
+    </form><br><br>
+
+   {{/if}}
+
+
+    <table>
+
+        <tr style="text-transform:capitalize","text-size:5px";"color:#EE4E34">
+            <th>customerid</th>
+            <th>Orderid</th>
+            <th>Amount</th>
+            <th>Address</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {{#each custorder}}
+        <tr>
+            <th>{{this.customerid}}</th>
+            <th>{{this.orderid}}</th>
+            <th>{{this.amount}}</th>
+            <th>{{this.address}}</th>
+            <th><a href="/?edit_id={{this._id}}">Edit</a></th>
+            <th><a href="/?delete_id={{this._id}}" onclick="return confirm('Are you sure want to delete?')" >Delete</a></th>
+        </tr>
+         {{/each}}
+    </table>
+
+</body>
+</html>
